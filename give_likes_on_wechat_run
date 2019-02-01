@@ -1,0 +1,16 @@
+import time
+import random
+
+# 一次性点完所有的赞
+def zan_in_one_page(d):
+    the_count = d(resourceId="com.tencent.mm:id/b21").count
+    for i in range(the_count):
+        t = random.uniform(0.4, 0.7)
+        time.sleep(t)
+        d(resourceId="com.tencent.mm:id/b21")[i].click()
+
+
+zan_in_one_page(d)
+for index in range(40):
+    d.swipe_points([(116, 1900), (116, 215)], 1) # 换页
+    zan_in_one_page(d)
