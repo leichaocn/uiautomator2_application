@@ -1,0 +1,25 @@
+# 一次性点完所有的赞
+def zan_in_one_page(d):
+    the_count = d(resourceId="com.tencent.mm:id/dg4").count
+    for i in range(the_count):
+        if d(resourceId="com.tencent.mm:id/dg4").count<the_count:
+            break
+        else:
+            d(resourceId="com.tencent.mm:id/dg4")[i].click()
+
+        if d(resourceId="com.tencent.mm:id/df5").count>=1:  # 保证能看上，能点上
+            d.watcher("hehe").when(text="赞").click(resourceId="com.tencent.mm:id/df5")
+            d.watchers.run()
+            # d(resourceId="com.tencent.mm:id/df5").click()  # 点赞  转发
+    return d
+
+import time
+import random
+# zan_in_one_page(d)
+for index in range(50):
+    t = random.uniform(0.4, 1.1)
+    time.sleep(t)
+    zan_in_one_page(d)
+    d.swipe_points([(116, 1900), (116, 215)], 1) # 换页
+    if d(text="取消").count>=1:
+        break
